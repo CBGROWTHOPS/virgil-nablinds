@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.nablinds.co/sitemap.xml
+LLM-Context: https://www.nablinds.co/llm.txt
