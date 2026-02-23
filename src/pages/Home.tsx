@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import CTASection from '../components/CTASection';
+import BeforeAfterSlider from '../components/BeforeAfterSlider';
 import { useSEO } from '../utils/seo';
 
 const COLLECTIONS = [
@@ -148,28 +149,10 @@ export default function Home() {
         <div className="section-wide">
           <p className="label-micro text-stone text-center mb-10">Before / After</p>
           <h2 className="text-ink text-center mb-16">UNCONTROLLED VS DESIGNED</h2>
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <div>
-              <div className="aspect-[4/3] overflow-hidden mb-4">
-                <img
-                  src="/images/gallery/uncontrolled-windows.png"
-                  alt="Uncontrolled light"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p className="label-micro text-stone">UNCONTROLLED</p>
-            </div>
-            <div>
-              <div className="aspect-[4/3] overflow-hidden mb-4">
-                <img
-                  src="/images/gallery/designed-controlled-windows.png"
-                  alt="Designed light control"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <p className="label-micro text-stone">DESIGNED</p>
-            </div>
-          </div>
+          <BeforeAfterSlider
+            beforeImage="/images/gallery/uncontrolled-windows.png"
+            afterImage="/images/gallery/designed-controlled-windows.png"
+          />
         </div>
       </section>
 
