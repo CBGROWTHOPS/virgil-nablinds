@@ -118,14 +118,14 @@ export default function Home() {
             <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 gap-8">
           {COLLECTIONS.map((collection) => (
             <Link
               key={collection.slug}
               to={`/collections/${collection.slug}`}
               className="card-collection group block"
             >
-              <div className="aspect-[4/5] overflow-hidden mb-4">
+              <div className="aspect-[4/5] overflow-hidden mb-4 min-h-[280px] md:min-h-[360px]">
                 <img
                   src={collection.image}
                   alt={collection.name}
