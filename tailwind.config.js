@@ -4,23 +4,28 @@ export default {
   theme: {
     extend: {
       colors: {
-        'warm-dark': '#4A4A4A',
-        'warm-gray': '#6B6B6B',
-        'warm-white': '#FAFAF8',
-        'warm-cream': '#F5F1E8',
-        'soft-sand': '#EDE8E0',
-        'taupe': '#A89B8A',
-        'ocean': '#5b8fa3',
-        'champagne': '#e8d5c4',
-        'navy': '#2C3E50',
-        'charcoal': '#3A3A3A',
-        'charcoal-dark': '#2A2A2A',
-        'warm-gold': '#C9A962',
-        'phone': '#2d7a5e',
+        'paper': '#F5F3EF',
+        'ink': '#1A1A1A',
+        'sand': '#C9B99A',
+        'stone': '#8A8A8A',
+        'sand-light': '#E8E2D9',
+        'ink-light': '#3A3A3A',
       },
       fontFamily: {
-        serif: ['Playfair Display', 'Georgia', 'serif'],
-        sans: ['Lato', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'sans-serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+      },
+      letterSpacing: {
+        'micro': '0.2em',
+        'wide-custom': '0.1em',
+      },
+      maxWidth: {
+        'content': '1200px',
+        'narrow': '800px',
+      },
+      spacing: {
+        'gutter': '8%',
+        'gutter-lg': '12%',
       },
     },
   },

@@ -1,92 +1,137 @@
-import { useEffect } from 'react';
-import { Phone } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight } from 'lucide-react';
 import { useSEO } from '../utils/seo';
-import ContactInfo from '../components/ContactInfo';
-import ContactForm from '../components/ContactForm';
 
 export default function Contact() {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+
   useSEO({
-    title: 'Contact NA Blinds | Free Window Treatment Consultation South Florida',
-    description: 'Request a free consultation for custom window treatments. Serving Miami-Dade, Broward, and Palm Beach counties. Call 954-629-1373.',
+    title: 'Contact | NA Blinds | South Florida',
+    description: 'Start the conversation about your window treatment project. Contact NA Blinds for custom window solutions in Miami-Dade, Broward, and Palm Beach.',
     canonicalUrl: 'https://www.nablinds.co/contact'
   });
 
-  useEffect(() => {
-    const hash = window.location.hash;
-    if (hash === '#consultation-form') {
-      setTimeout(() => {
-        const element = document.getElementById('consultation-form');
-        if (element) {
-          const headerOffset = 100;
-          const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    setIsSuccess(true);
+    setIsSubmitting(false);
+  };
 
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth'
-          });
-        }
-      }, 300);
-    }
-  }, []);
+  if (isSuccess) {
+    return (
+      <div className="min-h-screen bg-paper flex items-center justify-center">
+        <div className="max-w-xl mx-auto px-6 py-20 text-center">
+          <p className="label-micro text-stone mb-6">Received</p>
+          <h1 className="text-ink mb-6">THANK YOU.</h1>
+          <p className="body-large text-stone">
+            We'll be in touch within 24 hours.
+          </p>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div>
-      <section className="relative min-h-[400px] md:min-h-[500px] flex items-center py-8 md:py-20 px-6">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: `url('/hero-contact.png')`,
-          }}
-        >
-          <div className="absolute inset-0 bg-warm-dark bg-opacity-50"></div>
-        </div>
-        <div className="relative max-w-4xl mx-auto text-center text-white">
-          <h1 className="text-5xl md:text-6xl text-white mb-6 drop-shadow-lg">
-            Get Started Today
-          </h1>
-          <p className="text-xl leading-relaxed drop-shadow-md">
-            Schedule your free in-home consultation. Same-week appointments available.
+    <div className="bg-paper">
+      <section className="py-24 md:py-32 section-wide">
+        <div className="max-w-2xl mx-auto">
+          <p className="label-micro text-stone mb-6">Contact</p>
+          <h1 className="text-ink mb-6">START THE CONVERSATION.</h1>
+          <p className="body-large text-stone mb-12">
+            Tell us about your space.
           </p>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div>
+              <label className="block label-micro text-stone mb-2">Name</label>
+              <input
+                type="text"
+                required
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="w-full p-4 border border-sand-light focus:border-ink focus:outline-none bg-transparent text-ink"
+              />
+            </div>
+            <div>
+              <label className="block label-micro text-stone mb-2">Email</label>
+              <input
+                type="email"
+                required
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                className="w-full p-4 border border-sand-light focus:border-ink focus:outline-none bg-transparent text-ink"
+              />
+            </div>
+            <div>
+              <label className="block label-micro text-stone mb-2">Message</label>
+              <textarea
+                required
+                rows={5}
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                placeholder="Tell us about your project, your space, or any questions you have..."
+                className="w-full p-4 border border-sand-light focus:border-ink focus:outline-none bg-transparent text-ink resize-none"
+              />
+            </div>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="btn-primary inline-flex items-center gap-3"
+            >
+              {isSubmitting ? 'Sending...' : 'Send Message'}
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </form>
         </div>
       </section>
 
-      <section className="py-20 px-6 bg-warm-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12">
-            <ContactInfo />
-            <div id="consultation-form">
-              <ContactForm />
-
-              <div className="mt-8 mb-8 text-center px-4">
-                <div className="mb-3 text-lg">⭐⭐⭐⭐⭐</div>
-                <p className="text-warm-gray italic mb-1">"Installed in our Brickell condo. HOA approved and flawless."</p>
-                <p className="text-warm-gray">— David R., Brickell</p>
-              </div>
-
-              <div className="text-center">
-                <p className="text-warm-gray mb-3 sm:mb-4 text-sm sm:text-base">Prefer to call?</p>
-                <a
-                  href="tel:954-629-1373"
-                  className="inline-flex items-center justify-center gap-2 bg-white text-phone border-2 border-phone px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-base sm:text-lg hover:bg-phone hover:text-white active:bg-phone active:text-white transition-all touch-manipulation shadow-sm"
-                >
-                  <Phone className="w-5 h-5 flex-shrink-0" />
-                  <span>Call 954-629-1373 Now</span>
-                </a>
-              </div>
+      {/* Contact Info */}
+      <section className="py-16 border-t border-sand-light">
+        <div className="section-wide">
+          <div className="max-w-2xl mx-auto grid md:grid-cols-2 gap-12">
+            <div>
+              <p className="label-micro text-stone mb-4">Phone</p>
+              <a 
+                href="tel:954-629-1373" 
+                className="text-ink text-lg hover:text-stone transition-colors"
+              >
+                954.629.1373
+              </a>
+            </div>
+            <div>
+              <p className="label-micro text-stone mb-4">Email</p>
+              <a 
+                href="mailto:info@nablinds.co" 
+                className="text-ink text-lg hover:text-stone transition-colors"
+              >
+                info@nablinds.co
+              </a>
+            </div>
+            <div>
+              <p className="label-micro text-stone mb-4">Location</p>
+              <address className="text-ink text-lg not-italic">
+                10034 Spanish Isles Blvd<br />
+                Boca Raton, FL 33498
+              </address>
+            </div>
+            <div>
+              <p className="label-micro text-stone mb-4">Service Areas</p>
+              <p className="text-ink text-lg">
+                Miami-Dade<br />
+                Broward<br />
+                Palm Beach
+              </p>
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="py-20 px-6 bg-soft-sand">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-semibold text-warm-dark mb-4">
-            Same-Week Appointments Available
-          </h2>
-          <p className="text-lg text-warm-gray">
-            We understand your time is valuable. Contact us today and we'll schedule your consultation at your earliest convenience.
-          </p>
         </div>
       </section>
     </div>
