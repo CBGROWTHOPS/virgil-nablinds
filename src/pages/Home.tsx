@@ -152,7 +152,7 @@ export default function Home() {
             <div>
               <div className="aspect-[4/3] overflow-hidden mb-4">
                 <img
-                  src="/images/gallery/uncontrolled-bare-windows.png"
+                  src="/images/gallery/uncontrolled-windows.png"
                   alt="Uncontrolled light"
                   className="w-full h-full object-cover"
                 />
@@ -162,7 +162,7 @@ export default function Home() {
             <div>
               <div className="aspect-[4/3] overflow-hidden mb-4">
                 <img
-                  src="/images/gallery/gallery-solar-living-warm.png"
+                  src="/images/gallery/designed-controlled-windows.png"
                   alt="Designed light control"
                   className="w-full h-full object-cover"
                 />
