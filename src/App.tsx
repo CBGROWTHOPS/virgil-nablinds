@@ -11,6 +11,7 @@ import Contact from './pages/Contact';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
 import ThankYou from './pages/ThankYou';
+import ThankYouConsultation from './pages/ThankYouConsultation';
 import Motorized from './pages/Motorized';
 import BuildYourProject from './pages/BuildYourProject';
 import CollectionsHub from './pages/collections/CollectionsHub';
@@ -50,6 +51,7 @@ function App() {
           {/* Standalone pages (no header/footer) */}
           <Route path="/build-your-project" element={<BuildYourProject />} />
           <Route path="/thank-you" element={<ThankYou />} />
+          <Route path="/thank-you-consultation" element={<ThankYouConsultation />} />
           
           {/* Landing Pages */}
           <Route path="/lp/facebook" element={<Meta />} />

@@ -1,15 +1,17 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { useSEO } from '../utils/seo';
+import { submitToWebhook } from '../utils/webhook';
 
 export default function Contact() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     message: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   useSEO({
     title: 'Contact | NA Blinds | South Florida',
@@ -20,25 +22,22 @@ export default function Contact() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-    setIsSuccess(true);
-    setIsSubmitting(false);
-  };
 
-  if (isSuccess) {
-    return (
-      <div className="min-h-screen bg-paper flex items-center justify-center">
-        <div className="max-w-xl mx-auto px-6 py-20 text-center">
-          <p className="label-micro text-stone mb-6">Received</p>
-          <h1 className="text-ink mb-6">THANK YOU.</h1>
-          <p className="body-large text-stone">
-            We'll be in touch within 24 hours.
-          </p>
-        </div>
-      </div>
-    );
-  }
+    const success = await submitToWebhook({
+      name: formData.name,
+      email: formData.email,
+      message: formData.message,
+      formName: 'Contact Form',
+    });
+
+    setIsSubmitting(false);
+
+    if (success) {
+      navigate(`/thank-you?email=${encodeURIComponent(formData.email)}`);
+    } else {
+      alert('Something went wrong. Please try again or call us at 954-629-1373.');
+    }
+  };
 
   return (
     <div className="bg-paper">

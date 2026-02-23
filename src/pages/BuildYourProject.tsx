@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowLeft } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import { useSEO } from '../utils/seo';
 import { submitConfiguratorToWebhook } from '../utils/configuratorWebhook';
 
@@ -53,6 +53,7 @@ const CONTROL_MODES = [
 ];
 
 export default function BuildYourProject() {
+  const navigate = useNavigate();
   const [state, setState] = useState<FormState>({
     step: 1,
     propertyType: '',
@@ -67,7 +68,6 @@ export default function BuildYourProject() {
     notes: '',
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSuccess, setIsSuccess] = useState(false);
 
   useSEO({
     title: 'Engineer Your Light | Start Your Project | NA Blinds',
@@ -116,30 +116,12 @@ export default function BuildYourProject() {
     });
 
     if (success) {
-      setIsSuccess(true);
+      navigate(`/thank-you-consultation?email=${encodeURIComponent(state.email)}&name=${encodeURIComponent(state.firstName)}`);
     } else {
       alert('Something went wrong. Please try again or call us at 954-629-1373.');
     }
     setIsSubmitting(false);
   };
-
-  if (isSuccess) {
-    return (
-      <div className="min-h-screen bg-paper flex items-center justify-center">
-        <div className="max-w-xl mx-auto px-6 py-20 text-center">
-          <p className="label-micro text-stone mb-6">Received</p>
-          <h1 className="text-ink mb-6">THANK YOU, {state.firstName.toUpperCase()}.</h1>
-          <p className="body-large text-stone mb-10">
-            We'll review your space and reach out within 24 hours to schedule your consultation.
-          </p>
-          <Link to="/" className="btn-primary inline-flex items-center gap-3">
-            Return Home
-            <ArrowRight className="w-4 h-4" />
-          </Link>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-paper">

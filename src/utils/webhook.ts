@@ -40,12 +40,13 @@ function splitName(fullName: string): { firstName: string; lastName: string } {
 export async function submitToWebhook(data: {
   name: string;
   email: string;
-  phone: string;
+  phone?: string;
   message: string;
   address?: string;
+  formName?: string;
 }): Promise<boolean> {
   const { firstName, lastName } = splitName(data.name);
-  const formattedPhone = formatPhoneE164(data.phone);
+  const formattedPhone = data.phone ? formatPhoneE164(data.phone) : '';
 
   const payload: WebhookPayload = {
     first_name: firstName,
@@ -54,7 +55,7 @@ export async function submitToWebhook(data: {
     phone: formattedPhone,
     message: `${data.message}${data.address ? `\n\nAddress: ${data.address}` : ''}`,
     page_url: window.location.href,
-    form_name: 'Free Consultation',
+    form_name: data.formName || 'Free Consultation',
     source: 'Website',
   };
 
