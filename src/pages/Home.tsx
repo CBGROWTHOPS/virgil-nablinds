@@ -152,7 +152,7 @@ export default function Home() {
             <div>
               <div className="aspect-[4/3] overflow-hidden mb-4">
                 <img
-                  src="/images/gallery/gallery-solar-office-harsh.png"
+                  src="/images/gallery/uncontrolled-bare-windows.png"
                   alt="Uncontrolled light"
                   className="w-full h-full object-cover"
                 />
