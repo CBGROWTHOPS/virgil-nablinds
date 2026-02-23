@@ -58,7 +58,7 @@ const PROJECTS = [
     location: 'Weston',
     type: 'Family Home',
     collection: 'DARK',
-    image: '/images/gallery/gallery-drapes-master-southflorida.png',
+    image: '/images/gallery/gallery-drapes-master-weston-closed.png',
   },
 ];
 
