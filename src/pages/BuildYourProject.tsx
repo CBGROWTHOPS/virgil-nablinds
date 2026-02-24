@@ -7,6 +7,7 @@ import { submitConfiguratorToWebhook } from '../utils/configuratorWebhook';
 type PropertyType = 'high-rise' | 'single-family' | 'townhouse' | 'other';
 type LightPriority = 'privacy' | 'heat-control' | 'ambiance' | 'darkness' | 'not-sure';
 type WindowCount = '1-3' | '4-8' | '9-15' | '16+';
+type HasMeasurements = 'yes' | 'no' | 'not-yet';
 type ControlMode = 'manual' | 'motorized' | 'smart' | 'not-sure';
 
 interface FormState {
@@ -14,6 +15,7 @@ interface FormState {
   propertyType: PropertyType | '';
   lightPriority: LightPriority | '';
   windowCount: WindowCount | '';
+  hasMeasurements: HasMeasurements | '';
   controlMode: ControlMode | '';
   firstName: string;
   lastName: string;
@@ -45,6 +47,12 @@ const WINDOW_COUNTS = [
   { id: '16+', label: '16+ Windows' },
 ];
 
+const MEASUREMENTS_OPTIONS = [
+  { id: 'yes', label: 'Yes, I have measurements', description: 'I\'ve measured my windows' },
+  { id: 'no', label: 'No, I\'d like you to measure', description: 'Schedule a professional measure' },
+  { id: 'not-yet', label: 'Not yet', description: 'I\'ll get them before we finalize' },
+];
+
 const CONTROL_MODES = [
   { id: 'manual', label: 'Manual', description: 'Cordless lift or wand' },
   { id: 'motorized', label: 'Motorized', description: 'Remote control operation' },
@@ -59,6 +67,7 @@ export default function BuildYourProject() {
     propertyType: '',
     lightPriority: '',
     windowCount: '',
+    hasMeasurements: '',
     controlMode: '',
     firstName: '',
     lastName: '',
@@ -75,7 +84,7 @@ export default function BuildYourProject() {
     canonicalUrl: 'https://www.nablinds.co/build-your-project',
   });
 
-  const totalSteps = 5;
+  const totalSteps = 6;
 
   const updateState = (updates: Partial<FormState>) => {
     setState((prev) => ({ ...prev, ...updates }));
@@ -97,6 +106,11 @@ export default function BuildYourProject() {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const measurementsNote = state.hasMeasurements
+      ? `Measurements: ${state.hasMeasurements === 'yes' ? 'Customer has measurements' : state.hasMeasurements === 'no' ? 'Customer would like us to measure' : 'Not yet'}.`
+      : '';
+    const additionalNotes = [measurementsNote, state.notes].filter(Boolean).join(' ').trim() || undefined;
+
     const success = await submitConfiguratorToWebhook({
       projectScope: state.propertyType,
       windowCountRange: state.windowCount,
@@ -106,13 +120,13 @@ export default function BuildYourProject() {
       productType: state.lightPriority,
       colour: '',
       controlType: state.controlMode,
-      knowsDimensions: false,
+      knowsDimensions: state.hasMeasurements === 'yes',
       firstName: state.firstName,
       lastName: state.lastName,
       mobile: state.phone,
       email: state.email,
       suburb: state.address,
-      additionalNotes: state.notes,
+      additionalNotes,
     });
 
     if (success) {
@@ -225,8 +239,36 @@ export default function BuildYourProject() {
           </div>
         )}
 
-        {/* Step 4: Control Mode */}
+        {/* Step 4: Measurements */}
         {state.step === 4 && (
+          <div className="animate-fade-in">
+            <h2 className="headline-large text-ink mb-4">MEASUREMENTS.</h2>
+            <p className="body-large text-stone mb-10">Do you have window measurements?</p>
+            <div className="space-y-3">
+              {MEASUREMENTS_OPTIONS.map((option) => (
+                <button
+                  key={option.id}
+                  type="button"
+                  onClick={() => {
+                    updateState({ hasMeasurements: option.id as HasMeasurements });
+                    setTimeout(goNext, 200);
+                  }}
+                  className={`w-full p-5 text-left border transition-all ${
+                    state.hasMeasurements === option.id
+                      ? 'border-ink bg-sand-light'
+                      : 'border-sand-light hover:border-stone'
+                  }`}
+                >
+                  <span className="block font-medium text-ink">{option.label}</span>
+                  <span className="block text-stone text-sm mt-1">{option.description}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Step 5: Control Mode */}
+        {state.step === 5 && (
           <div className="animate-fade-in">
             <h2 className="headline-large text-ink mb-4">CONTROL MODE.</h2>
             <p className="body-large text-stone mb-10">How would you like to operate your shades?</p>
@@ -253,8 +295,8 @@ export default function BuildYourProject() {
           </div>
         )}
 
-        {/* Step 5: Contact */}
-        {state.step === 5 && (
+        {/* Step 6: Contact */}
+        {state.step === 6 && (
           <div className="animate-fade-in">
             <h2 className="headline-large text-ink mb-4">ALMOST THERE.</h2>
             <p className="body-large text-stone mb-10">
