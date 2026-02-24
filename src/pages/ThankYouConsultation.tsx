@@ -10,10 +10,6 @@ export default function ThankYouConsultation() {
   useEffect(() => {
     document.title = 'Thank You | NA Blinds';
 
-    if (typeof window !== 'undefined' && window.fbq) {
-      window.fbq('track', 'Lead');
-    }
-
     const metaRobots = document.querySelector('meta[name="robots"]');
     if (metaRobots) {
       metaRobots.setAttribute('content', 'noindex, nofollow');
