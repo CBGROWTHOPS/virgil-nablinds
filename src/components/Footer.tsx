@@ -22,7 +22,9 @@ export default function Footer() {
         <div className="grid md:grid-cols-12 gap-12 md:gap-8 mb-16">
           <div className="md:col-span-5">
             <Link to="/" className="inline-block mb-6">
-              <img src="/logo.png" alt="NA Blinds" className="h-9 w-auto invert" />
+              <span className="font-serif text-2xl font-medium text-paper">
+                NA Blinds
+              </span>
             </Link>
             <p className="text-paper/60 text-sm leading-relaxed max-w-sm mb-8">
               Architectural window solutions for modern South Florida homes. 

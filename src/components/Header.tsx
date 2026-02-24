@@ -19,8 +19,10 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-paper/95 backdrop-blur-sm">
       <div className="section-wide py-4 md:py-5">
         <div className="flex items-center justify-between">
-          <Link to="/" className="flex items-center touch-manipulation">
-            <img src="/logo.png" alt="NA Blinds" className="h-8 md:h-9 w-auto" />
+          <Link to="/" className="flex items-center gap-2 touch-manipulation">
+            <span className="font-serif text-xl md:text-2xl font-medium tracking-tight text-ink">
+              NA Blinds
+            </span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-10" aria-label="Main navigation">

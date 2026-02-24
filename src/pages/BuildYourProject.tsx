@@ -129,7 +129,7 @@ export default function BuildYourProject() {
         {/* Header */}
         <div className="mb-12">
           <Link to="/" className="inline-block mb-8">
-            <img src="/logo.png" alt="NA Blinds" className="h-8 w-auto" />
+            <span className="font-serif text-xl text-ink">NA Blinds</span>
           </Link>
           <p className="label-micro text-stone mb-4">Step {state.step} of {totalSteps}</p>
           <div className="flex gap-2 mb-8">
