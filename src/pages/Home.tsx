@@ -100,7 +100,7 @@ export default function Home() {
       {/* Value Statement */}
       <section className="py-24 md:py-32 section-wide">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-ink mb-6">NOT BLINDS. CONTROL.</h2>
+          <h2 className="text-ink mb-6">Not Just Blinds. Control.</h2>
           <p className="body-large text-stone">
             We design how light lives inside your space.
           </p>
