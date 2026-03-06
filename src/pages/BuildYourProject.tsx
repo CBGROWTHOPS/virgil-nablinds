@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
+import { AddressAutocomplete } from '../components/AddressAutocomplete';
 import { useSEO } from '../utils/seo';
 import { submitConfiguratorToWebhook } from '../utils/configuratorWebhook';
 
@@ -348,13 +349,14 @@ export default function BuildYourProject() {
               </div>
               <div>
                 <label className="block label-micro text-stone mb-2">Property Address or Area</label>
-                <input
-                  type="text"
-                  required
+                <AddressAutocomplete
                   value={state.address}
-                  onChange={(e) => updateState({ address: e.target.value })}
+                  onChange={(value) => updateState({ address: value })}
                   placeholder="e.g., Brickell, Miami or full address"
                   className="w-full p-4 border border-sand-light focus:border-ink focus:outline-none bg-transparent"
+                  required
+                  countries={['us']}
+                  locationBias={{ lat: 26.3683, lng: -80.1289, radius: 80000 }}
                 />
               </div>
               <div>
