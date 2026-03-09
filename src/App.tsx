@@ -17,6 +17,7 @@ import BuildYourProject from './pages/BuildYourProject';
 import CollectionsHub from './pages/collections/CollectionsHub';
 import CollectionPage from './pages/collections/CollectionPage';
 import Meta from './pages/lp/Meta';
+import Referral from './pages/Referral';
 import DocsHub from './pages/docs/DocsHub';
 import BrandSystemDoc from './pages/docs/BrandSystemDoc';
 import ConversionPathDoc from './pages/docs/ConversionPathDoc';
@@ -83,6 +84,7 @@ function App() {
           <Route path="/projects" element={<Layout><Projects /></Layout>} />
           <Route path="/about" element={<Layout><About /></Layout>} />
           <Route path="/contact" element={<Layout><Contact /></Layout>} />
+          <Route path="/referral" element={<Layout><Referral /></Layout>} />
           <Route path="/service-areas" element={<Layout><ServiceAreas /></Layout>} />
           
           {/* Legal */}

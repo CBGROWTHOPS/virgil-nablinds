@@ -14,6 +14,7 @@ export default function Footer() {
     { name: 'Projects', path: '/projects' },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
+    { name: 'Partner Program', path: '/referral' },
   ];
 
   return (
