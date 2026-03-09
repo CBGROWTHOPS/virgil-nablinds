@@ -106,7 +106,7 @@ export default function Referral() {
     }
   };
 
-  const inputClass = 'w-full p-4 border border-sand-light focus:border-ink focus:outline-none bg-transparent text-ink';
+  const inputClass = 'w-full p-4 border border-stone/25 focus:border-ink focus:outline-none bg-transparent text-ink';
   const labelClass = 'block label-micro text-stone mb-2';
 
   return (
